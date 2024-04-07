@@ -20,7 +20,7 @@ def handle_query():
             ],
             model="gpt-3.5-turbo",
         )
-        answer = chat_completion.choices[0].prompt.content
+        answer = chat_completion.choices[0].message.content
         return jsonify({"answer": answer}), 200
     except Exception as e:
         # Returnerer en feilmelding og en 500 Internal Server Error statuskode hvis noe går galt.
