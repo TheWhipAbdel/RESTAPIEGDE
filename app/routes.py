@@ -7,7 +7,7 @@ main = Blueprint('main', __name__)
 @main.route('/query', methods=['POST'])
 def handle_query():
     data = request.json
-    user_message = data.get('message')
+    user_message = data.get('prompt')
 
     # Sjekk om brukermeldingen faktisk ble mottatt
     if not user_message:
@@ -20,7 +20,7 @@ def handle_query():
             ],
             model="gpt-3.5-turbo",
         )
-        answer = chat_completion.choices[0].message.content
+        answer = chat_completion.choices[0].prompt.content
         return jsonify({"answer": answer}), 200
     except Exception as e:
         # Returnerer en feilmelding og en 500 Internal Server Error statuskode hvis noe går galt.
